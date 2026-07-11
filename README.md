@@ -130,7 +130,7 @@ Before running this project, make sure you have installed:
 ## 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/ecommerce-api.git
+git clone 
 ```
 
 ---
@@ -186,7 +186,7 @@ npm run dev
 The server will start on:
 
 ```
-http://localhost:3000
+http://localhost:5000
 ```
 
 ---
@@ -247,6 +247,9 @@ http://localhost:3000
 | GET | `/api/orders/:id` | Retrieve an order by ID |
 | POST | `/api/orders` | Create a new order |
 | PATCH | `/api/orders/:id/status` | Update order status |
+| DELETE | `/api/orders` | Cancel all orders at once |
+| DELETE | `/api/orders/:id` | Remove an order |
+
 
 ---
 
