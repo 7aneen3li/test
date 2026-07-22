@@ -1,461 +1,201 @@
-# 🛒 E-Commerce REST API
+<div align="center">
 
-> A scalable, modular, and RESTful backend API for managing products, categories, shopping carts, and orders using **Node.js**, **Express.js**, **MongoDB**, and **Mongoose**.
+# 🛍️ Ecommerce API
 
-![Node.js](https://img.shields.io/badge/Node.js-20.x-339933?logo=node.js&logoColor=white)
-![Express.js](https://img.shields.io/badge/Express.js-Backend-000000?logo=express)
-![MongoDB](https://img.shields.io/badge/MongoDB-Database-47A248?logo=mongodb&logoColor=white)
-![Mongoose](https://img.shields.io/badge/Mongoose-ODM-880000)
-![License](https://img.shields.io/badge/License-Educational-blue)
+### A RESTful backend for managing an online store — categories, products, carts, and orders.
 
----
+<p>
+  <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js" />
+  <img src="https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white" alt="Express.js" />
+  <img src="https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB" />
+  <img src="https://img.shields.io/badge/Mongoose-880000?style=for-the-badge&logo=mongoose&logoColor=white" alt="Mongoose" />
+</p>
 
-# 📑 Table of Contents
-
-- [Project Overview](#-project-overview)
-- [Features](#-features)
-- [Tech Stack](#-tech-stack)
-- [Project Architecture](#-project-architecture)
-- [Prerequisites](#-prerequisites)
-- [Installation](#-installation)
-- [Environment Variables](#-environment-variables)
-- [API Endpoints](#-api-endpoints)
-- [Example Request & Response](#-example-request--response)
-- [HTTP Status Codes](#-http-status-codes)
-- [Project Structure](#-project-structure)
-- [Folder Description](#-folder-description)
-- [Available Scripts](#-available-scripts)
-- [Security Features](#-security-features)
-- [Testing](#-testing)
-- [Future Improvements](#-future-improvements)
-- [Author](#-author)
-- [License](#-license)
+</div>
 
 ---
 
-# 📖 Project Overview
+## 📖 About
 
-This project is a professional RESTful E-Commerce API that provides the backend functionality required for an online shopping application.
+**Ecommerce API** is a RESTful backend service built to power an online store. It handles everything from browsing product categories to managing a shopping cart and placing orders — with clean, predictable endpoints and centralized error handling.
 
-The API allows clients to:
+**Tech Stack:**
 
-- Manage product categories
-- Manage products
-- Create and manage shopping carts
-- Create and manage customer orders
-
-The application follows RESTful API best practices, uses MongoDB for persistent data storage, and follows a clean modular architecture that separates routing, business logic, database models, and middleware.
-
----
-
-# ✨ Features
-
-- RESTful API Architecture
-- Complete CRUD Operations
-- Category Management
-- Product Management
-- Shopping Cart Management
-- Order Management
-- MongoDB Database Integration
-- Mongoose ODM
-- Environment Variable Configuration
-- Global Error Handling
-- Modular Project Structure
-- Express Middleware
-- MongoDB Sanitization
-- Clean and Maintainable Code
+| Layer | Technology |
+|---|---|
+| Runtime | Node.js |
+| Framework | Express.js |
+| Database | MongoDB |
+| ODM | Mongoose |
 
 ---
 
-# 🛠 Tech Stack
+## ✨ Features
 
-| Technology | Purpose |
-|------------|---------|
-| Node.js | JavaScript Runtime |
-| Express.js | Web Framework |
-| MongoDB | NoSQL Database |
-| Mongoose | MongoDB ODM |
-| dotenv | Environment Variables |
-| Nodemon | Development Server |
-| express-mongo-sanitize | Security Middleware |
+- 🗂️ **Categories API** — create, read, update, and delete product categories
+- 📦 **Products API** — full CRUD for products, linked to categories
+- 🛒 **Cart API** — add, update, remove items, view, and clear the cart
+- 🧾 **Orders API** — checkout from cart, track order status, view and manage orders
+- 🛡️ Centralized error handling with consistent error responses
+- 🧼 Input sanitization against NoSQL injection (`express-mongo-sanitize`)
+- 🌱 Database seeding script for quick local setup
 
 ---
 
-# 🏗 Project Architecture
+## ✅ Prerequisites
 
-The project follows a layered architecture to keep responsibilities separated.
+Make sure you have the following installed before you begin:
 
-```text
-                Client
-                   │
-                   ▼
-              Express Routes
-                   │
-                   ▼
-              Controllers
-                   │
-                   ▼
-               Mongoose Models
-                   │
-                   ▼
-                MongoDB
-```
-
-### Layer Responsibilities
-
-- **Routes** receive HTTP requests.
-- **Controllers** contain business logic.
-- **Models** define MongoDB schemas.
-- **Database** manages persistent storage.
-- **Middleware** handles validation, sanitization, and error handling.
-- **Utilities** contain reusable helper functions.
-
-This architecture improves scalability, readability, and maintainability.
+| Requirement | Notes |
+|---|---|
+| **Node.js** | v18 or higher recommended |
+| **MongoDB** | Local instance, or a free [MongoDB Atlas](https://www.mongodb.com/atlas) cluster |
+| **npm** | Comes bundled with Node.js |
 
 ---
 
-# 📦 Prerequisites
+## 🚀 Installation
 
-Before running this project, make sure you have installed:
+Follow these steps in order to get the project running locally.
 
-- Node.js (v18 or later)
-- npm
-- MongoDB Community Server or MongoDB Atlas
-- Git
-
----
-
-# ⚙ Installation
-
-## 1. Clone the Repository
+**1. Clone the repository**
 
 ```bash
-git clone 
+git clone https://github.com/7aneen3li/Ecommerce-API.git
+cd Ecommerce-API
 ```
 
----
-
-## 2. Navigate to the Project Folder
-
-```bash
-cd ecommerce-api
-```
-
----
-
-## 3. Install Dependencies
+**2. Install dependencies**
 
 ```bash
 npm install
 ```
 
----
+**3. Set up environment variables**
 
-## 4. Configure Environment Variables
+Copy the example file and fill in your own values:
 
-Create a `.env` file in the project root.
-
-Example:
-
-```env
-PORT=3000
-NODE_ENV=development
-MONGO_URI=mongodb://127.0.0.1:27017/ecommerce-api
+```bash
+cp .env.example .env
 ```
 
----
+See the [Environment Variables](#-environment-variables) section below for what each variable means.
 
-## 5. Seed the Database
-
-Run:
+**4. Seed the database** *(optional but recommended)*
 
 ```bash
 npm run seed
 ```
 
-This will populate MongoDB with sample data.
-
----
-
-## 6. Start the Development Server
+**5. Run the development server**
 
 ```bash
 npm run dev
 ```
 
-The server will start on:
-
-```
-http://localhost:5000
-```
+The API will be live at: http://localhost:5000
+> Other available scripts: `npm start` (runs the server without auto-reload).
 
 ---
 
-# 🔐 Environment Variables
+## 🔐 Environment Variables
+
+Create a `.env` file in the project root with the following variables:
 
 | Variable | Description | Example |
-|----------|-------------|---------|
-| PORT | Express server port | 3000 |
-| NODE_ENV | Application environment | development |
-| MONGO_URI | MongoDB connection string | mongodb://127.0.0.1:27017/ecommerce-api |
+|---|---|---|
+| `PORT` | The port the server listens on | `5000` |
+| `NODE_ENV` | The environment the app is running in | `development` |
+| `MONGO_URL` | Your MongoDB connection string (local or Atlas) | `mongodb://127.0.0.1:27017/ecommerce-api` |
 
 ---
 
-# 📚 API Endpoints
+## 📡 API Endpoints
 
-## 📁 Categories
+All endpoints are prefixed with `/api`.
+
+### 🗂️ Categories — `/api/categories`
 
 | Method | Endpoint | Description |
-|---------|----------|-------------|
-| GET | `/api/categories` | Retrieve all categories |
-| GET | `/api/categories/:id` | Retrieve a category by ID |
-| POST | `/api/categories` | Create a new category |
-| PATCH | `/api/categories/:id` | Update an existing category |
-| DELETE | `/api/categories/:id` | Delete a category |
+|---|---|---|
+| `GET` | `/api/categories` | Get all categories |
+| `POST` | `/api/categories` | Create a new category |
+| `GET` | `/api/categories/:id` | Get a single category by ID |
+| `PATCH` | `/api/categories/:id` | Update a category by ID |
+| `DELETE` | `/api/categories/:id` | Delete a category by ID |
 
----
-
-## 📦 Products
+### 📦 Products — `/api/products`
 
 | Method | Endpoint | Description |
-|---------|----------|-------------|
-| GET | `/api/products` | Retrieve all products |
-| GET | `/api/products/:id` | Retrieve a product by ID |
-| POST | `/api/products` | Create a new product |
-| PATCH | `/api/products/:id` | Update a product |
-| DELETE | `/api/products/:id` | Delete a product |
+|---|---|---|
+| `GET` | `/api/products` | Get all products |
+| `POST` | `/api/products` | Create a new product |
+| `GET` | `/api/products/:id` | Get a single product by ID |
+| `PATCH` | `/api/products/:id` | Update a product by ID |
+| `DELETE` | `/api/products/:id` | Delete a product by ID |
 
----
-
-## 🛒 Shopping Cart
+### 🛒 Cart — `/api/cart`
 
 | Method | Endpoint | Description |
-|---------|----------|-------------|
-| GET | `/api/cart` | Retrieve the shopping cart |
-| DELETE | `/api/cart` | Clear the shopping cart |
-| POST | `/api/cart/items` | Add an item to the cart |
-| PATCH | `/api/cart/items/:productId` | Update item quantity |
-| DELETE | `/api/cart/items/:productId` | Remove an item from the cart |
+|---|---|---|
+| `GET` | `/api/cart` | Get the current cart |
+| `DELETE` | `/api/cart` | Clear the entire cart |
+| `POST` | `/api/cart/items` | Add an item to the cart |
+| `PATCH` | `/api/cart/items/:productId` | Update the quantity of an item in the cart |
+| `DELETE` | `/api/cart/items/:productId` | Remove an item from the cart |
 
----
-
-## 📋 Orders
+### 🧾 Orders — `/api/orders`
 
 | Method | Endpoint | Description |
-|---------|----------|-------------|
-| GET | `/api/orders` | Retrieve all orders |
-| GET | `/api/orders/:id` | Retrieve an order by ID |
-| POST | `/api/orders` | Create a new order |
-| PATCH | `/api/orders/:id/status` | Update order status |
-| DELETE | `/api/orders` | Cancel all orders at once |
-| DELETE | `/api/orders/:id` | Remove an order |
-
-
----
-
-# 📨 Example Request & Response
-
-## Create Product
-
-### Request
-
-**POST** `/api/products`
-
-```json
-{
-  "name": "Wireless Mouse",
-  "price": 29.99,
-  "category": "Electronics"
-}
-```
-
-### Successful Response
-
-```json
-{
-  "success": true,
-  "message": "Product created successfully.",
-  "data": {
-    "_id": "665adf4d4e32b8b7ef8d1234",
-    "name": "Wireless Mouse",
-    "price": 29.99,
-    "category": "Electronics"
-  }
-}
-```
+|---|---|---|
+| `GET` | `/api/orders` | Get all orders |
+| `POST` | `/api/orders` | Create a new order (checkout from cart) |
+| `DELETE` | `/api/orders` | Delete all orders |
+| `GET` | `/api/orders/:id` | Get a single order by ID |
+| `DELETE` | `/api/orders/:id` | Delete a single order by ID |
+| `PATCH` | `/api/orders/:id/status` | Update the status of an order |
 
 ---
 
-# 🚦 HTTP Status Codes
+## 🗄️ Project Structure
 
-| Status Code | Meaning |
-|-------------|---------|
-| 200 | Request completed successfully |
-| 201 | Resource created successfully |
-| 400 | Bad request |
-| 404 | Resource not found |
-| 500 | Internal server error |
-
----
-
-# 📁 Project Structure
-
-```text
-ecommerce-api/
-│
+ECOMMERCE-API/
 ├── config/
-│   └── Application configuration
-│
-├── controllers/
-│   ├── categoryController.js
-│   ├── productController.js
-│   ├── cartController.js
-│   └── orderController.js
-│
+│ └── app.config.js # App-wide configuration (port, env, etc.)
+├── controllers/ # Request handlers — business logic for each resource
+│ ├── cart.controller.js
+│ ├── category.controller.js
+│ ├── order.controller.js
+│ └── product.controller.js
 ├── db/
-│   └── MongoDB connection
-│
+│ └── connectDB.js # MongoDB connection setup
 ├── middleware/
-│   ├── errorHandler.js
-│   └── validateRequest.js
-│
-├── models/
-│   ├── Category.js
-│   ├── Product.js
-│   ├── Cart.js
-│   └── Order.js
-│
-├── routes/
-│   ├── categoryRoutes.js
-│   ├── productRoutes.js
-│   ├── cartRoutes.js
-│   └── orderRoutes.js
-│
+│ └── errorHandler.js # Centralized error-handling middleware
+├── models/ # Mongoose schemas
+│ ├── cart.model.js
+│ ├── category.model.js
+│ ├── order.model.js
+│ └── product.model.js
+├── postman/ # Postman collection & environment for API testing
+│ ├── E-Commerce API.postman_collection.json
+│ └── E-Commerce API Dev.postman_environment.json
+├── routes/ # Route definitions, mapped to controllers
+│ ├── cart.routes.js
+│ ├── category.routes.js
+│ ├── order.routes.js
+│ └── product.routes.js
 ├── utils/
-│   └── Helper functions
-│
-├── seed.js
-├── app.js
-├── package.json
-├── .env.example
-└── README.md
-```
+│ ├── AppError.js # Custom error class
+│ └── asyncHandler.js # Wrapper to catch async errors
+├── .env.example # Template for required environment variables
+├── app.js # Application entry point
+├── seed.js # Database seeding script
+└── package.json
 
 ---
 
-# 📂 Folder Description
+<div align="center">
 
-| Folder | Description |
-|---------|-------------|
-| config | Stores application configuration |
-| controllers | Contains the business logic |
-| db | MongoDB connection setup |
-| middleware | Custom middleware and global error handling |
-| models | Mongoose schemas and models |
-| routes | Express API routes |
-| utils | Helper functions and utilities |
+Built as a graduation project — the first entry in a growing portfolio. 🎓
 
----
-
-# ▶ Available Scripts
-
-Install dependencies
-
-```bash
-npm install
-```
-
-Run the development server
-
-```bash
-npm run dev
-```
-
-Run the production server
-
-```bash
-npm start
-```
-
-Seed the database
-
-```bash
-npm run seed
-```
-
----
-
-# 🔒 Security Features
-
-This project includes several security and best-practice features:
-
-- MongoDB NoSQL Injection Protection using `express-mongo-sanitize`
-- Environment Variables using `dotenv`
-- Global Error Handling Middleware
-- Mongoose Schema Validation
-- Clean RESTful API Design
-- Separation of Concerns
-- Modular Code Organization
-
----
-
-# 🧪 Testing
-
-The API can be tested using:
-
-- Postman
-- Thunder Client
-- Insomnia
-
-Each endpoint returns meaningful HTTP status codes and JSON responses.
-
----
-
-# 🚀 Future Improvements
-
-Potential future enhancements include:
-
-- JWT Authentication
-- User Accounts
-- Admin Dashboard
-- Product Reviews
-- Wishlist
-- Image Uploads
-- Payment Gateway Integration
-- API Documentation using Swagger/OpenAPI
-- Unit and Integration Testing
-- Docker Support
-
----
-
-# 💡 Design Principles
-
-The project follows modern backend development principles:
-
-- RESTful API Design
-- Modular Architecture
-- Separation of Concerns
-- Reusable Middleware
-- Persistent Database Storage
-- Environment-Based Configuration
-- Maintainable and Scalable Codebase
-
----
-
-# 👩‍💻 Author
-
-**Haneen Ali**
-
-Developed as part of the **Digital Egypt Cubs Initiative (DECI)** Web Development Program.
-
-This project demonstrates backend development skills using modern JavaScript technologies and follows industry best practices for building scalable REST APIs.
-
----
-
-# 📄 License
-
-This project was developed for educational purposes as part of the DECI Web Development curriculum.
-
----
-
-⭐ **Thank you for reviewing this project!**
+</div>
