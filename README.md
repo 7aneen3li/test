@@ -15,11 +15,35 @@
 
 ---
 
+## Table of Contents
+
+- About
+- Features
+- Prerequisites
+- Installation
+- Environment Variables
+- API Endpoints
+- Project Structure
+
 ## 📖 About
 
 **Ecommerce API** is a RESTful backend service built to power an online store. It handles everything from browsing product categories to managing a shopping cart and placing orders — with clean, predictable endpoints and centralized error handling.
 
-**Tech Stack:**
+This project includes the following REST APIs:
+
+- Categories API
+- Products API
+- Shopping Cart API
+- Orders API
+
+### Tech Stack
+
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+
+**Technology Details:**
 
 | Layer | Technology |
 |---|---|
@@ -106,7 +130,7 @@ Create a `.env` file in the project root with the following variables:
 |---|---|---|
 | `PORT` | The port the server listens on | `5000` |
 | `NODE_ENV` | The environment the app is running in | `development` |
-| `MONGO_URL` | Your MongoDB connection string (local or Atlas) | `mongodb://127.0.0.1:27017/ecommerce-api` |
+| `MONGO_URI` | Your MongoDB connection string (local or Atlas) | `mongodb://127.0.0.1:27017/ecommerce-api` |
 
 ---
 
@@ -159,6 +183,7 @@ All endpoints are prefixed with `/api`.
 
 ## 🗄️ Project Structure
 
+```text
 ECOMMERCE-API/
 ├── config/
 │ └── app.config.js # App-wide configuration (port, env, etc.)
@@ -191,6 +216,7 @@ ECOMMERCE-API/
 ├── app.js # Application entry point
 ├── seed.js # Database seeding script
 └── package.json
+```
 
 ---
 
